@@ -44,8 +44,26 @@ export default function Contact() {
       }
     } catch (error: any) {
       console.error('Error sending message:', error);
+      
+      const isFailedToFetch = error.message && error.message.includes('Failed to fetch');
+      
       setStatus('error');
-      setErrorMessage(error.message || 'Failed to send message. Please try again.');
+      if (isFailedToFetch) {
+        setErrorMessage('Ad-blocker or Brave Shield blocked the background email. Redirecting to mail app...');
+        
+        // Auto fallback to mailto after 2.5 seconds so the message is never lost!
+        setTimeout(() => {
+          const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+          const body = encodeURIComponent(
+            `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+          );
+          window.location.href = `mailto:najathniju007@gmail.com?subject=${subject}&body=${body}`;
+          setStatus('idle');
+        }, 2500);
+      } else {
+        setErrorMessage(error.message || 'Failed to send message. Please try again.');
+        setTimeout(() => setStatus('idle'), 5000);
+      }
     }
   };
 
