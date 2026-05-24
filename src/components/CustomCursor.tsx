@@ -20,9 +20,9 @@ export default function CustomCursor() {
     };
 
     const animate = () => {
-      // Ring follows with smooth lag
-      ringPos.current.x += (mouse.current.x - ringPos.current.x) * 0.12;
-      ringPos.current.y += (mouse.current.y - ringPos.current.y) * 0.12;
+      // Ring follows with a faster, snappier lag (0.24 instead of 0.12)
+      ringPos.current.x += (mouse.current.x - ringPos.current.x) * 0.24;
+      ringPos.current.y += (mouse.current.y - ringPos.current.y) * 0.24;
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${ringPos.current.x - 18}px, ${ringPos.current.y - 18}px)`;
       }
@@ -30,12 +30,14 @@ export default function CustomCursor() {
     };
 
     const onMouseEnterInteractive = () => {
-      ringRef.current?.classList.add('scale-150', 'border-brand-cyan');
+      const ringCircle = ringRef.current?.querySelector('.ring-circle');
+      ringCircle?.classList.add('scale-150', 'border-brand-cyan');
       dotRef.current?.classList.add('opacity-0');
     };
 
     const onMouseLeaveInteractive = () => {
-      ringRef.current?.classList.remove('scale-150', 'border-brand-cyan');
+      const ringCircle = ringRef.current?.querySelector('.ring-circle');
+      ringCircle?.classList.remove('scale-150', 'border-brand-cyan');
       dotRef.current?.classList.remove('opacity-0');
     };
 
@@ -64,12 +66,17 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Ring */}
+      {/* Ring Wrapper (handles positioning without CSS transform transitions) */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-9 h-9 rounded-full border-2 border-brand-purple pointer-events-none z-[9999] transition-transform duration-300 transition-[border-color]"
+        className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{ willChange: 'transform' }}
-      />
+      >
+        {/* Ring Circle (handles hover styling transition) */}
+        <div
+          className="ring-circle w-9 h-9 rounded-full border-2 border-brand-purple transition-all duration-300 ease-out"
+        />
+      </div>
       {/* Dot */}
       <div
         ref={dotRef}
