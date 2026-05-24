@@ -6,18 +6,18 @@ export default {
     extend: {
       colors: {
         brand: {
-          bg: '#0a0a0f',
-          surface: '#12121a',
-          border: '#1e1e2e',
+          bg: 'var(--bg)',
+          surface: 'var(--surface)',
+          border: 'var(--border)',
           purple: '#7c3aed',
           'purple-light': '#a855f7',
           'purple-dark': '#5b21b6',
           cyan: '#06b6d4',
           'cyan-light': '#22d3ee',
           green: '#10b981',
-          text: '#f1f5f9',
-          muted: '#94a3b8',
-          dim: '#475569',
+          text: 'var(--text)',
+          muted: 'var(--muted)',
+          dim: 'var(--dim)',
         },
       },
       fontFamily: {

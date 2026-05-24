@@ -280,8 +280,8 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               className="mt-4 p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-brand-text text-sm font-body text-left"
             >
-              <div className="flex gap-2 items-center">
-                <AlertCircle size={16} className="text-red-500 flex-shrink-0" />
+              <div className="flex gap-2 items-start">
+                <AlertCircle size={16} className="text-red-500 flex-shrink-0 mt-0.5" />
                 <span className="text-red-400 font-semibold">{errorMessage}</span>
               </div>
             </motion.div>
