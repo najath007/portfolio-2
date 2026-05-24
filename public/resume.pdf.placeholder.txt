@@ -1,0 +1,6 @@
+This is a placeholder file.
+
+Replace this with your actual resume PDF named exactly: resume.pdf
+Place it in the /public/ directory.
+
+The "Download CV" button in the Navbar and Hero section is already wired to /resume.pdf with the download attribute.
